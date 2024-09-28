@@ -2761,6 +2761,17 @@ category = "UI (User Interface)"
 wasm = true
 
 [[example]]
+name = "toggle"
+path = "examples/ui/toggle.rs"
+doc-scrape-examples = true
+
+[package.metadata.example.toggle]
+name = "Toggle"
+description = "Illustrates creating and updating a toggle button"
+category = "UI (User Interface)"
+wasm = true
+
+[[example]]
 name = "display_and_visibility"
 path = "examples/ui/display_and_visibility.rs"
 doc-scrape-examples = true
