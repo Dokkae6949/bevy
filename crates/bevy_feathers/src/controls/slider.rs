@@ -32,8 +32,20 @@ use crate::{
     handle_or_path::HandleOrPath,
     rounded_corners::RoundedCorners,
     theme::{ThemeFontColor, ThemedText, UiTheme},
-    tokens,
 };
+
+pub mod tokens {
+    pub mod color {
+        use crate::tokens::color::*;
+
+        pub const BACKGROUND: &str = surface::BASE;
+
+        pub const BAR: &str = border::BASE;
+        pub const BAR_DISABLED: &str = border::DISABLED;
+
+        pub const TEXT: &str = text::BASE;
+    }
+}
 
 /// Slider template properties, passed to [`slider`] function.
 pub struct SliderProps {
@@ -116,7 +128,7 @@ pub fn slider<B: Bundle>(props: SliderProps, overrides: B) -> impl Bundle {
                 justify_content: JustifyContent::Center,
                 ..Default::default()
             },
-            ThemeFontColor(tokens::SLIDER_TEXT),
+            ThemeFontColor(tokens::color::TEXT),
             InheritableFont {
                 font: HandleOrPath::Path(fonts::MONO.to_owned()),
                 font_size: 12.0,
@@ -152,10 +164,10 @@ fn update_slider_colors_remove(
 
 fn set_slider_colors(theme: &Res<'_, UiTheme>, disabled: bool, gradient: &mut BackgroundGradient) {
     let bar_color = theme.color(match disabled {
-        true => tokens::SLIDER_BAR_DISABLED,
-        false => tokens::SLIDER_BAR,
+        true => tokens::color::BAR_DISABLED,
+        false => tokens::color::BAR,
     });
-    let bg_color = theme.color(tokens::SLIDER_BG);
+    let bg_color = theme.color(tokens::color::BACKGROUND);
     if let [Gradient::Linear(linear_gradient)] = &mut gradient.0[..] {
         linear_gradient.stops[0].color = bar_color;
         linear_gradient.stops[1].color = bar_color;

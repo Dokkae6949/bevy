@@ -29,8 +29,29 @@ use crate::{
     font_styles::InheritableFont,
     handle_or_path::HandleOrPath,
     theme::{ThemeBackgroundColor, ThemeBorderColor, ThemeFontColor},
-    tokens,
 };
+
+pub mod tokens {
+    pub mod color {
+        use crate::tokens::color::*;
+
+        pub const BACKGROUND: &str = surface::BASE;
+        pub const BACKGROUND_DISABLED: &str = surface::DISABLED;
+
+        pub const BACKGROUND_CHECKED: &str = accent::primary::BASE;
+        pub const BACKGROUND_CHECKED_DISABLED: &str = surface::DISABLED;
+
+        pub const BORDER: &str = border::BASE;
+        pub const BORDER_DISABLED: &str = border::DISABLED;
+        pub const BORDER_HOVERED: &str = border::FOCUSED;
+
+        pub const MARK: &str = accent::primary::ACTIVE;
+        pub const MARK_DISABLED: &str = accent::primary::DISABLED;
+
+        pub const TEXT: &str = text::BASE;
+        pub const TEXT_DISABLED: &str = text::DISABLED;
+    }
+}
 
 /// Parameters for the checkbox template, passed to [`checkbox`] function.
 #[derive(Default)]
@@ -81,7 +102,7 @@ pub fn checkbox<C: SpawnableList<ChildOf> + Send + Sync + 'static, B: Bundle>(
         Hovered::default(),
         EntityCursor::System(bevy_window::SystemCursorIcon::Pointer),
         TabIndex(0),
-        ThemeFontColor(tokens::CHECKBOX_TEXT),
+        ThemeFontColor(tokens::color::TEXT),
         InheritableFont {
             font: HandleOrPath::Path(fonts::REGULAR.to_owned()),
             font_size: 14.0,
@@ -97,8 +118,8 @@ pub fn checkbox<C: SpawnableList<ChildOf> + Send + Sync + 'static, B: Bundle>(
                 },
                 CheckboxOutline,
                 BorderRadius::all(Val::Px(4.0)),
-                ThemeBackgroundColor(tokens::CHECKBOX_BG),
-                ThemeBorderColor(tokens::CHECKBOX_BORDER),
+                ThemeBackgroundColor(tokens::color::BACKGROUND),
+                ThemeBorderColor(tokens::color::BORDER),
                 children![(
                     // Cheesy checkmark: rotated node with L-shaped border.
                     Node {
@@ -116,7 +137,7 @@ pub fn checkbox<C: SpawnableList<ChildOf> + Send + Sync + 'static, B: Bundle>(
                     },
                     UiTransform::from_rotation(Rot2::FRAC_PI_4),
                     CheckboxMark,
-                    ThemeBorderColor(tokens::CHECKBOX_MARK),
+                    ThemeBorderColor(tokens::color::MARK),
                 )],
             )),
             label,
@@ -244,26 +265,26 @@ fn set_checkbox_colors(
     commands: &mut Commands,
 ) {
     let outline_border_token = match (disabled, hovered) {
-        (true, _) => tokens::CHECKBOX_BORDER_DISABLED,
-        (false, true) => tokens::CHECKBOX_BORDER_HOVER,
-        _ => tokens::CHECKBOX_BORDER,
+        (true, _) => tokens::color::BORDER_DISABLED,
+        (false, true) => tokens::color::BORDER_HOVERED,
+        _ => tokens::color::BORDER,
     };
 
     let outline_bg_token = match (disabled, checked) {
-        (true, true) => tokens::CHECKBOX_BG_CHECKED_DISABLED,
-        (true, false) => tokens::CHECKBOX_BG_DISABLED,
-        (false, true) => tokens::CHECKBOX_BG_CHECKED,
-        (false, false) => tokens::CHECKBOX_BG,
+        (true, true) => tokens::color::BACKGROUND_CHECKED_DISABLED,
+        (true, false) => tokens::color::BACKGROUND_DISABLED,
+        (false, true) => tokens::color::BACKGROUND_CHECKED,
+        (false, false) => tokens::color::BACKGROUND,
     };
 
     let mark_token = match disabled {
-        true => tokens::CHECKBOX_MARK_DISABLED,
-        false => tokens::CHECKBOX_MARK,
+        true => tokens::color::MARK_DISABLED,
+        false => tokens::color::MARK,
     };
 
     let font_color_token = match disabled {
-        true => tokens::CHECKBOX_TEXT_DISABLED,
-        false => tokens::CHECKBOX_TEXT,
+        true => tokens::color::TEXT_DISABLED,
+        false => tokens::color::TEXT,
     };
 
     // Change outline background

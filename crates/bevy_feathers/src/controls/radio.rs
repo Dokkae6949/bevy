@@ -28,8 +28,24 @@ use crate::{
     font_styles::InheritableFont,
     handle_or_path::HandleOrPath,
     theme::{ThemeBackgroundColor, ThemeBorderColor, ThemeFontColor},
-    tokens,
 };
+
+/// Radio component specific tokens.
+pub mod tokens {
+    pub mod color {
+        use crate::tokens::color::*;
+
+        pub const TEXT: &str = text::BASE;
+        pub const TEXT_DISABLED: &str = text::DISABLED;
+
+        pub const MARK: &str = accent::primary::BASE;
+        pub const MARK_DISABLED: &str = accent::primary::DISABLED;
+
+        pub const BORDER: &str = border::BASE;
+        pub const BORDER_DISABLED: &str = border::DISABLED;
+        pub const BORDER_HOVERED: &str = border::FOCUSED;
+    }
+}
 
 /// Marker for the radio outline
 #[derive(Component, Default, Clone, Reflect)]
@@ -64,7 +80,7 @@ pub fn radio<C: SpawnableList<ChildOf> + Send + Sync + 'static, B: Bundle>(
         Hovered::default(),
         EntityCursor::System(bevy_window::SystemCursorIcon::Pointer),
         TabIndex(0),
-        ThemeFontColor(tokens::RADIO_TEXT),
+        ThemeFontColor(tokens::color::TEXT),
         InheritableFont {
             font: HandleOrPath::Path(fonts::REGULAR.to_owned()),
             font_size: 14.0,
@@ -83,7 +99,7 @@ pub fn radio<C: SpawnableList<ChildOf> + Send + Sync + 'static, B: Bundle>(
                 },
                 RadioOutline,
                 BorderRadius::MAX,
-                ThemeBorderColor(tokens::RADIO_BORDER),
+                ThemeBorderColor(tokens::color::BORDER),
                 children![(
                     // Cheesy checkmark: rotated node with L-shaped border.
                     Node {
@@ -93,7 +109,7 @@ pub fn radio<C: SpawnableList<ChildOf> + Send + Sync + 'static, B: Bundle>(
                     },
                     BorderRadius::MAX,
                     RadioMark,
-                    ThemeBackgroundColor(tokens::RADIO_MARK),
+                    ThemeBackgroundColor(tokens::color::MARK),
                 )],
             )),
             label,
@@ -216,19 +232,19 @@ fn set_radio_colors(
     commands: &mut Commands,
 ) {
     let outline_border_token = match (disabled, hovered) {
-        (true, _) => tokens::RADIO_BORDER_DISABLED,
-        (false, true) => tokens::RADIO_BORDER_HOVER,
-        _ => tokens::RADIO_BORDER,
+        (true, _) => tokens::color::BORDER_DISABLED,
+        (false, true) => tokens::color::BORDER_HOVERED,
+        _ => tokens::color::BORDER,
     };
 
     let mark_token = match disabled {
-        true => tokens::RADIO_MARK_DISABLED,
-        false => tokens::RADIO_MARK,
+        true => tokens::color::MARK_DISABLED,
+        false => tokens::color::MARK,
     };
 
     let font_color_token = match disabled {
-        true => tokens::RADIO_TEXT_DISABLED,
-        false => tokens::RADIO_TEXT,
+        true => tokens::color::TEXT_DISABLED,
+        false => tokens::color::TEXT,
     };
 
     // Change outline border

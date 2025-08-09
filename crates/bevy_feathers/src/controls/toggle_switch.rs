@@ -25,8 +25,26 @@ use crate::{
     constants::size,
     cursor::EntityCursor,
     theme::{ThemeBackgroundColor, ThemeBorderColor},
-    tokens,
 };
+
+pub mod tokens {
+    pub mod color {
+        use crate::tokens::color::*;
+
+        pub const BACKGROUND: &str = surface::BASE;
+        pub const BACKGROUND_DISABLED: &str = surface::DISABLED;
+
+        pub const BACKGROUND_CHECKED: &str = accent::primary::BASE;
+        pub const BACKGROUND_CHECKED_DISABLED: &str = surface::DISABLED;
+
+        pub const BORDER: &str = border::BASE;
+        pub const BORDER_DISABLED: &str = border::DISABLED;
+        pub const BORDER_HOVERED: &str = border::FOCUSED;
+
+        pub const SLIDE: &str = control::BASE;
+        pub const SLIDE_DISABLED: &str = control::DISABLED;
+    }
+}
 
 /// Parameters for the toggle switch template, passed to [`toggle_switch`] function.
 #[derive(Default)]
@@ -63,8 +81,8 @@ pub fn toggle_switch<B: Bundle>(props: ToggleSwitchProps, overrides: B) -> impl 
         },
         ToggleSwitchOutline,
         BorderRadius::all(Val::Px(5.0)),
-        ThemeBackgroundColor(tokens::SWITCH_BG),
-        ThemeBorderColor(tokens::SWITCH_BORDER),
+        ThemeBackgroundColor(tokens::color::BACKGROUND),
+        ThemeBorderColor(tokens::color::BORDER),
         AccessibilityNode(accesskit::Node::new(Role::Switch)),
         Hovered::default(),
         EntityCursor::System(bevy_window::SystemCursorIcon::Pointer),
@@ -81,7 +99,7 @@ pub fn toggle_switch<B: Bundle>(props: ToggleSwitchProps, overrides: B) -> impl 
             },
             BorderRadius::all(Val::Px(3.0)),
             ToggleSwitchSlide,
-            ThemeBackgroundColor(tokens::SWITCH_SLIDE),
+            ThemeBackgroundColor(tokens::color::SLIDE),
         )],
     )
 }
@@ -191,21 +209,21 @@ fn set_switch_colors(
     commands: &mut Commands,
 ) {
     let outline_border_token = match (disabled, hovered) {
-        (true, _) => tokens::SWITCH_BORDER_DISABLED,
-        (false, true) => tokens::SWITCH_BORDER_HOVER,
-        _ => tokens::SWITCH_BORDER,
+        (true, _) => tokens::color::BORDER_DISABLED,
+        (false, true) => tokens::color::BORDER_HOVERED,
+        _ => tokens::color::BORDER,
     };
 
     let outline_bg_token = match (disabled, checked) {
-        (true, true) => tokens::SWITCH_BG_CHECKED_DISABLED,
-        (true, false) => tokens::SWITCH_BG_DISABLED,
-        (false, true) => tokens::SWITCH_BG_CHECKED,
-        (false, false) => tokens::SWITCH_BG,
+        (true, true) => tokens::color::BACKGROUND_CHECKED_DISABLED,
+        (true, false) => tokens::color::BACKGROUND_DISABLED,
+        (false, true) => tokens::color::BACKGROUND_CHECKED,
+        (false, false) => tokens::color::BACKGROUND,
     };
 
     let slide_token = match disabled {
-        true => tokens::SWITCH_SLIDE_DISABLED,
-        false => tokens::SWITCH_SLIDE,
+        true => tokens::color::SLIDE_DISABLED,
+        false => tokens::color::SLIDE,
     };
 
     let slide_pos = match checked {

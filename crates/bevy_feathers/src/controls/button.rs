@@ -24,8 +24,29 @@ use crate::{
     handle_or_path::HandleOrPath,
     rounded_corners::RoundedCorners,
     theme::{ThemeBackgroundColor, ThemeFontColor},
-    tokens,
 };
+
+pub mod tokens {
+    pub mod color {
+        use crate::tokens::color::*;
+
+        pub const BACKGROUND: &str = surface::BASE;
+        pub const BACKGROUND_DISABLED: &str = surface::DISABLED;
+        pub const BACKGROUND_HOVERED: &str = surface::FOCUSED;
+        pub const BACKGROUND_PRESSED: &str = surface::ACTIVE;
+
+        pub const BACKGROUND_PRIMARY: &str = accent::primary::BASE;
+        pub const BACKGROUND_PRIMARY_DISABLED: &str = accent::primary::DISABLED;
+        pub const BACKGROUND_PRIMARY_HOVERED: &str = accent::primary::FOCUSED;
+        pub const BACKGROUND_PRIMARY_PRESSED: &str = accent::primary::ACTIVE;
+
+        pub const TEXT: &str = text::BASE;
+        pub const TEXT_DISABLED: &str = text::DISABLED;
+
+        pub const TEXT_PRIMARY: &str = text::BASE;
+        pub const TEXT_PRIMARY_DISABLED: &str = text::DISABLED;
+    }
+}
 
 /// Color variants for buttons. This also functions as a component used by the dynamic styling
 /// system to identify which entities are buttons.
@@ -79,8 +100,8 @@ pub fn button<C: SpawnableList<ChildOf> + Send + Sync + 'static, B: Bundle>(
         EntityCursor::System(bevy_window::SystemCursorIcon::Pointer),
         TabIndex(0),
         props.corners.to_border_radius(4.0),
-        ThemeBackgroundColor(tokens::BUTTON_BG),
-        ThemeFontColor(tokens::BUTTON_TEXT),
+        ThemeBackgroundColor(tokens::color::BACKGROUND),
+        ThemeFontColor(tokens::color::TEXT),
         InheritableFont {
             font: HandleOrPath::Path(fonts::REGULAR.to_owned()),
             font_size: 14.0,
@@ -166,21 +187,21 @@ fn set_button_colors(
     commands: &mut Commands,
 ) {
     let bg_token = match (variant, disabled, pressed, hovered) {
-        (ButtonVariant::Normal, true, _, _) => tokens::BUTTON_BG_DISABLED,
-        (ButtonVariant::Normal, false, true, _) => tokens::BUTTON_BG_PRESSED,
-        (ButtonVariant::Normal, false, false, true) => tokens::BUTTON_BG_HOVER,
-        (ButtonVariant::Normal, false, false, false) => tokens::BUTTON_BG,
-        (ButtonVariant::Primary, true, _, _) => tokens::BUTTON_PRIMARY_BG_DISABLED,
-        (ButtonVariant::Primary, false, true, _) => tokens::BUTTON_PRIMARY_BG_PRESSED,
-        (ButtonVariant::Primary, false, false, true) => tokens::BUTTON_PRIMARY_BG_HOVER,
-        (ButtonVariant::Primary, false, false, false) => tokens::BUTTON_PRIMARY_BG,
+        (ButtonVariant::Normal, true, _, _) => tokens::color::BACKGROUND_DISABLED,
+        (ButtonVariant::Normal, false, true, _) => tokens::color::BACKGROUND_PRESSED,
+        (ButtonVariant::Normal, false, false, true) => tokens::color::BACKGROUND_HOVERED,
+        (ButtonVariant::Normal, false, false, false) => tokens::color::BACKGROUND,
+        (ButtonVariant::Primary, true, _, _) => tokens::color::BACKGROUND_PRIMARY_DISABLED,
+        (ButtonVariant::Primary, false, true, _) => tokens::color::BACKGROUND_PRIMARY_PRESSED,
+        (ButtonVariant::Primary, false, false, true) => tokens::color::BACKGROUND_PRIMARY_HOVERED,
+        (ButtonVariant::Primary, false, false, false) => tokens::color::BACKGROUND_PRIMARY,
     };
 
     let font_color_token = match (variant, disabled) {
-        (ButtonVariant::Normal, true) => tokens::BUTTON_TEXT_DISABLED,
-        (ButtonVariant::Normal, false) => tokens::BUTTON_TEXT,
-        (ButtonVariant::Primary, true) => tokens::BUTTON_PRIMARY_TEXT_DISABLED,
-        (ButtonVariant::Primary, false) => tokens::BUTTON_PRIMARY_TEXT,
+        (ButtonVariant::Normal, true) => tokens::color::TEXT_DISABLED,
+        (ButtonVariant::Normal, false) => tokens::color::TEXT,
+        (ButtonVariant::Primary, true) => tokens::color::TEXT_PRIMARY_DISABLED,
+        (ButtonVariant::Primary, false) => tokens::color::TEXT_PRIMARY,
     };
 
     // Change background color

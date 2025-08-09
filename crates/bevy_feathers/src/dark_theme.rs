@@ -1,5 +1,5 @@
 //! The standard `bevy_feathers` dark theme.
-use crate::{palette, tokens};
+use crate::{palette, tokens::color::*};
 use bevy_color::{Alpha, Luminance};
 use bevy_platform::collections::HashMap;
 
@@ -9,119 +9,64 @@ use crate::theme::ThemeProps;
 pub fn create_dark_theme() -> ThemeProps {
     ThemeProps {
         color: HashMap::from([
-            (tokens::WINDOW_BG.into(), palette::GRAY_0),
-            // Button
-            (tokens::BUTTON_BG.into(), palette::GRAY_3),
+            // Accent primary colors.
             (
-                tokens::BUTTON_BG_HOVER.into(),
-                palette::GRAY_3.lighter(0.05),
-            ),
-            (
-                tokens::BUTTON_BG_PRESSED.into(),
-                palette::GRAY_3.lighter(0.1),
-            ),
-            (tokens::BUTTON_BG_DISABLED.into(), palette::GRAY_2),
-            (tokens::BUTTON_PRIMARY_BG.into(), palette::ACCENT),
-            (
-                tokens::BUTTON_PRIMARY_BG_HOVER.into(),
-                palette::ACCENT.lighter(0.05),
-            ),
-            (
-                tokens::BUTTON_PRIMARY_BG_PRESSED.into(),
-                palette::ACCENT.lighter(0.1),
-            ),
-            (tokens::BUTTON_PRIMARY_BG_DISABLED.into(), palette::GRAY_2),
-            (tokens::BUTTON_TEXT.into(), palette::WHITE),
-            (
-                tokens::BUTTON_TEXT_DISABLED.into(),
-                palette::WHITE.with_alpha(0.5),
-            ),
-            (tokens::BUTTON_PRIMARY_TEXT.into(), palette::WHITE),
-            (
-                tokens::BUTTON_PRIMARY_TEXT_DISABLED.into(),
-                palette::WHITE.with_alpha(0.5),
-            ),
-            // Slider
-            (tokens::SLIDER_BG.into(), palette::GRAY_1),
-            (tokens::SLIDER_BAR.into(), palette::ACCENT),
-            (tokens::SLIDER_BAR_DISABLED.into(), palette::GRAY_2),
-            (tokens::SLIDER_TEXT.into(), palette::WHITE),
-            (
-                tokens::SLIDER_TEXT_DISABLED.into(),
-                palette::WHITE.with_alpha(0.5),
-            ),
-            // Checkbox
-            (tokens::CHECKBOX_BG.into(), palette::GRAY_3),
-            (tokens::CHECKBOX_BG_CHECKED.into(), palette::ACCENT),
-            (
-                tokens::CHECKBOX_BG_DISABLED.into(),
-                palette::GRAY_1.with_alpha(0.5),
-            ),
-            (
-                tokens::CHECKBOX_BG_CHECKED_DISABLED.into(),
-                palette::GRAY_3.with_alpha(0.5),
-            ),
-            (tokens::CHECKBOX_BORDER.into(), palette::GRAY_3),
-            (
-                tokens::CHECKBOX_BORDER_HOVER.into(),
-                palette::GRAY_3.lighter(0.1),
-            ),
-            (
-                tokens::CHECKBOX_BORDER_DISABLED.into(),
-                palette::GRAY_3.with_alpha(0.5),
-            ),
-            (tokens::CHECKBOX_MARK.into(), palette::WHITE),
-            (tokens::CHECKBOX_MARK_DISABLED.into(), palette::LIGHT_GRAY_2),
-            (tokens::CHECKBOX_TEXT.into(), palette::LIGHT_GRAY_1),
-            (
-                tokens::CHECKBOX_TEXT_DISABLED.into(),
-                palette::LIGHT_GRAY_1.with_alpha(0.5),
-            ),
-            // Radio
-            (tokens::RADIO_BORDER.into(), palette::GRAY_3),
-            (
-                tokens::RADIO_BORDER_HOVER.into(),
-                palette::GRAY_3.lighter(0.1),
-            ),
-            (
-                tokens::RADIO_BORDER_DISABLED.into(),
-                palette::GRAY_3.with_alpha(0.5),
-            ),
-            (tokens::RADIO_MARK.into(), palette::ACCENT),
-            (
-                tokens::RADIO_MARK_DISABLED.into(),
+                accent::primary::DISABLED.into(),
                 palette::ACCENT.with_alpha(0.5),
             ),
-            (tokens::RADIO_TEXT.into(), palette::LIGHT_GRAY_1),
             (
-                tokens::RADIO_TEXT_DISABLED.into(),
-                palette::LIGHT_GRAY_1.with_alpha(0.5),
+                accent::primary::MUTED.into(),
+                palette::ACCENT.with_alpha(0.6),
             ),
-            // Toggle Switch
-            (tokens::SWITCH_BG.into(), palette::GRAY_3),
-            (tokens::SWITCH_BG_CHECKED.into(), palette::ACCENT),
+            (accent::primary::BASE.into(), palette::ACCENT),
             (
-                tokens::SWITCH_BG_DISABLED.into(),
-                palette::GRAY_1.with_alpha(0.5),
+                accent::primary::FOCUSED.into(),
+                palette::ACCENT.lighter(0.05),
             ),
+            (accent::primary::ACTIVE.into(), palette::ACCENT.lighter(0.1)),
+            // Status colors.
+            (status::ERROR.into(), palette::ERROR),
+            (status::WARNING.into(), palette::WARNING),
+            (status::SUCCESS.into(), palette::SUCCESS),
+            (status::INFO.into(), palette::INFO),
+            // Axis colors
+            (axis::X.into(), palette::X_AXIS),
+            (axis::Y.into(), palette::Y_AXIS),
+            (axis::Z.into(), palette::Z_AXIS),
+            // Container colors
+            (container::DARK.into(), palette::GRAY_0),
+            (container::BASE.into(), palette::GRAY_1),
+            (container::LIGHT.into(), palette::GRAY_2),
+            // Surface colors
+            (surface::DISABLED.into(), palette::GRAY_2.with_alpha(0.5)),
+            (surface::MUTED.into(), palette::GRAY_2.with_alpha(0.6)),
+            (surface::BASE.into(), palette::GRAY_3),
+            (surface::FOCUSED.into(), palette::GRAY_3.lighter(0.05)),
+            (surface::ACTIVE.into(), palette::GRAY_3.lighter(0.1)),
+            // Control colors
+            (control::DISABLED.into(), palette::GRAY_1.with_alpha(0.5)),
+            (control::MUTED.into(), palette::GRAY_1.with_alpha(0.6)),
+            (control::BASE.into(), palette::GRAY_2),
+            (control::FOCUSED.into(), palette::GRAY_2.lighter(0.05)),
+            (control::ACTIVE.into(), palette::GRAY_2.lighter(0.1)),
+            // Border colors
             (
-                tokens::SWITCH_BG_CHECKED_DISABLED.into(),
-                palette::GRAY_3.with_alpha(0.5),
+                border::DISABLED.into(),
+                palette::WARM_GRAY_1.with_alpha(0.5),
             ),
-            (tokens::SWITCH_BORDER.into(), palette::GRAY_3),
-            (
-                tokens::SWITCH_BORDER_HOVER.into(),
-                palette::GRAY_3.lighter(0.1),
-            ),
-            (
-                tokens::SWITCH_BORDER_DISABLED.into(),
-                palette::GRAY_3.with_alpha(0.5),
-            ),
-            (tokens::SWITCH_SLIDE.into(), palette::LIGHT_GRAY_2),
-            (
-                tokens::SWITCH_SLIDE_DISABLED.into(),
-                palette::LIGHT_GRAY_2.with_alpha(0.3),
-            ),
+            (border::MUTED.into(), palette::WARM_GRAY_1.with_alpha(0.6)),
+            (border::BASE.into(), palette::WARM_GRAY_1),
+            (border::FOCUSED.into(), palette::WARM_GRAY_1.lighter(0.5)),
+            (border::ACTIVE.into(), palette::WARM_GRAY_1.lighter(0.6)),
+            // Text colors
+            (text::DISABLED.into(), palette::WHITE.with_alpha(0.5)),
+            (text::MUTED.into(), palette::WHITE.with_alpha(0.6)),
+            (text::BASE.into(), palette::WHITE),
+            (text::FOCUSED.into(), palette::WHITE),
+            (text::ACTIVE.into(), palette::WHITE),
+            // Selection colors
+            (selection::BASE.into(), palette::WHITE.with_alpha(0.1)),
+            (selection::FOCUSED.into(), palette::WHITE.with_alpha(0.15)),
         ]),
     }
 }
