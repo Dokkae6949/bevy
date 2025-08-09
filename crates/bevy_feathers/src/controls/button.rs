@@ -35,16 +35,16 @@ pub mod tokens {
         pub const BACKGROUND_HOVERED: &str = surface::FOCUSED;
         pub const BACKGROUND_PRESSED: &str = surface::ACTIVE;
 
-        pub const BACKGROUND_PRIMARY: &str = accent::primary::BASE;
-        pub const BACKGROUND_PRIMARY_DISABLED: &str = accent::primary::DISABLED;
-        pub const BACKGROUND_PRIMARY_HOVERED: &str = accent::primary::FOCUSED;
-        pub const BACKGROUND_PRIMARY_PRESSED: &str = accent::primary::ACTIVE;
+        pub const BACKGROUND_PRIMARY: &str = surface::accent::BASE;
+        pub const BACKGROUND_PRIMARY_DISABLED: &str = surface::accent::DISABLED;
+        pub const BACKGROUND_PRIMARY_HOVERED: &str = surface::accent::FOCUSED;
+        pub const BACKGROUND_PRIMARY_PRESSED: &str = surface::accent::ACTIVE;
 
-        pub const TEXT: &str = text::BASE;
-        pub const TEXT_DISABLED: &str = text::DISABLED;
+        pub const TEXT: &str = foreground::BASE;
+        pub const TEXT_DISABLED: &str = foreground::DISABLED;
 
-        pub const TEXT_PRIMARY: &str = text::BASE;
-        pub const TEXT_PRIMARY_DISABLED: &str = text::DISABLED;
+        pub const TEXT_PRIMARY: &str = foreground::BASE;
+        pub const TEXT_PRIMARY_DISABLED: &str = foreground::DISABLED;
     }
 }
 

@@ -38,18 +38,18 @@ pub mod tokens {
         pub const BACKGROUND: &str = surface::BASE;
         pub const BACKGROUND_DISABLED: &str = surface::DISABLED;
 
-        pub const BACKGROUND_CHECKED: &str = accent::primary::BASE;
+        pub const BACKGROUND_CHECKED: &str = surface::accent::BASE;
         pub const BACKGROUND_CHECKED_DISABLED: &str = surface::DISABLED;
 
         pub const BORDER: &str = border::BASE;
-        pub const BORDER_DISABLED: &str = border::DISABLED;
         pub const BORDER_HOVERED: &str = border::FOCUSED;
+        pub const BORDER_DISABLED: &str = surface::DISABLED;
 
-        pub const MARK: &str = accent::primary::ACTIVE;
-        pub const MARK_DISABLED: &str = accent::primary::DISABLED;
+        pub const MARK: &str = foreground::ELEVATED;
+        pub const MARK_DISABLED: &str = foreground::DISABLED;
 
-        pub const TEXT: &str = text::BASE;
-        pub const TEXT_DISABLED: &str = text::DISABLED;
+        pub const TEXT: &str = foreground::BASE;
+        pub const TEXT_DISABLED: &str = foreground::DISABLED;
     }
 }
 

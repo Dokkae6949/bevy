@@ -35,11 +35,11 @@ pub mod tokens {
     pub mod color {
         use crate::tokens::color::*;
 
-        pub const TEXT: &str = text::BASE;
-        pub const TEXT_DISABLED: &str = text::DISABLED;
+        pub const TEXT: &str = foreground::BASE;
+        pub const TEXT_DISABLED: &str = foreground::DISABLED;
 
-        pub const MARK: &str = accent::primary::BASE;
-        pub const MARK_DISABLED: &str = accent::primary::DISABLED;
+        pub const MARK: &str = surface::accent::BASE;
+        pub const MARK_DISABLED: &str = surface::accent::DISABLED;
 
         pub const BORDER: &str = border::BASE;
         pub const BORDER_DISABLED: &str = border::DISABLED;

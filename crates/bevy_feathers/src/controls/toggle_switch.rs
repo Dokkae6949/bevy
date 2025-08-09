@@ -32,17 +32,17 @@ pub mod tokens {
         use crate::tokens::color::*;
 
         pub const BACKGROUND: &str = surface::BASE;
-        pub const BACKGROUND_DISABLED: &str = surface::DISABLED;
+        pub const BACKGROUND_CHECKED: &str = surface::accent::BASE;
 
-        pub const BACKGROUND_CHECKED: &str = accent::primary::BASE;
+        pub const BACKGROUND_DISABLED: &str = surface::CONTRAST;
         pub const BACKGROUND_CHECKED_DISABLED: &str = surface::DISABLED;
 
-        pub const BORDER: &str = border::BASE;
-        pub const BORDER_DISABLED: &str = border::DISABLED;
-        pub const BORDER_HOVERED: &str = border::FOCUSED;
+        pub const BORDER: &str = surface::BASE;
+        pub const BORDER_HOVERED: &str = surface::FOCUSED;
+        pub const BORDER_DISABLED: &str = surface::DISABLED;
 
-        pub const SLIDE: &str = control::BASE;
-        pub const SLIDE_DISABLED: &str = control::DISABLED;
+        pub const SLIDE: &str = surface::INVERSE;
+        pub const SLIDE_DISABLED: &str = surface::ELEVATED;
     }
 }
 

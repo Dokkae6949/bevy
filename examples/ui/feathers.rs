@@ -135,7 +135,7 @@ fn demo_root(commands: &mut Commands) -> impl Bundle {
             ..default()
         },
         TabGroup::default(),
-        ThemeBackgroundColor(tokens::color::container::DARK),
+        ThemeBackgroundColor(tokens::color::container::WINDOW),
         children![(
             Node {
                 display: Display::Flex,
@@ -294,6 +294,23 @@ fn demo_root(commands: &mut Commands) -> impl Bundle {
                         radio(Checked, Spawn((Text::new("One"), ThemedText))),
                         radio((), Spawn((Text::new("Two"), ThemedText))),
                         radio((), Spawn((Text::new("Three"), ThemedText))),
+                    ]
+                ),
+                (
+                    Node {
+                        display: Display::Flex,
+                        flex_direction: FlexDirection::Column,
+                        row_gap: Val::Px(4.0),
+                        ..default()
+                    },
+                    CoreRadioGroup {
+                        on_change: Callback::System(radio_exclusion),
+                    },
+                    children![
+                        radio(
+                            (Checked, InteractionDisabled),
+                            Spawn((Text::new("Disabled Checked"), ThemedText))
+                        ),
                         radio(
                             InteractionDisabled,
                             Spawn((Text::new("Disabled"), ThemedText))
