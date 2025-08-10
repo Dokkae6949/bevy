@@ -1,5 +1,11 @@
 //! Used for spacing, padding and margins.
 
+#![allow(missing_docs)]
+
+// pub const SMALL: f32 = 4.;
+// pub const STANDARD: f32 = 6.;
+// pub const LARGE: f32 = 8.;
+
 pub const XXS: f32 = 2.;
 pub const XS: f32 = 4.;
 pub const SM: f32 = 8.;

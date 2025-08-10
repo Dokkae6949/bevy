@@ -46,16 +46,14 @@ pub mod tokens {
     pub mod sizing {
         use crate::tokens::sizing::*;
 
-        pub const HEIGHT: f32 = control::SM;
+        pub const HEIGHT: f32 = control::height::STANDARD;
         pub const THUMB: f32 = HEIGHT - 2.0;
-        pub const BORDER: f32 = border::SM;
+        pub const BORDER: f32 = thickness::STANDARD;
     }
 
     pub mod spacing {
-        // use crate::tokens::spacing;
-
         // TODO: Figure out why it bugs out without 3. padding.
-        pub const PADDING: f32 = 3.; //spacing::SM;
+        pub const PADDING: f32 = 3.;
     }
 
     pub mod radii {

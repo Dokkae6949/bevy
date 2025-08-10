@@ -48,8 +48,8 @@ pub mod tokens {
     pub mod sizing {
         use crate::tokens::sizing::*;
 
-        pub const SIZE: f32 = control::MD;
-        pub const BORDER: f32 = border::MD;
+        pub const SIZE: f32 = control::size::STANDARD;
+        pub const BORDER: f32 = thickness::STRONG;
     }
 
     pub mod spacing {
@@ -61,7 +61,7 @@ pub mod tokens {
     pub mod radii {
         use crate::tokens::radii;
 
-        pub const BORDER: f32 = radii::FULL;
+        pub const BORDER: f32 = radii::CIRCLE;
     }
 
     pub mod typography {
@@ -128,8 +128,8 @@ pub fn radio<C: SpawnableList<ChildOf> + Send + Sync + 'static, B: Bundle>(
                 children![(
                     // Cheesy checkmark: rotated node with L-shaped border.
                     Node {
-                        width: Val::Px(8.),
-                        height: Val::Px(8.),
+                        width: Val::Px(tokens::sizing::SIZE * 0.5 - tokens::sizing::BORDER * 0.5),
+                        height: Val::Px(tokens::sizing::SIZE * 0.5 - tokens::sizing::BORDER * 0.5),
                         ..Default::default()
                     },
                     BorderRadius::all(Val::Px(tokens::radii::BORDER)),

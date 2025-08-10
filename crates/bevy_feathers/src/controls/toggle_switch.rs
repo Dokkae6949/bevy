@@ -47,15 +47,15 @@ pub mod tokens {
     pub mod sizing {
         use crate::tokens::sizing::*;
 
-        pub const WIDTH: f32 = control::XL;
-        pub const HEIGHT: f32 = control::MD;
-        pub const BORDER: f32 = border::MD;
+        pub const WIDTH: f32 = control::width::STANDARD;
+        pub const HEIGHT: f32 = control::height::STANDARD;
+        pub const BORDER: f32 = thickness::STRONG;
     }
 
     pub mod radii {
         use crate::tokens::radii;
 
-        pub const BORDER: f32 = radii::SM;
+        pub const BORDER: f32 = radii::STANDARD;
         pub const BORDER_SLIDE: f32 = BORDER - super::sizing::BORDER * 0.5;
     }
 }

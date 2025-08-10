@@ -16,13 +16,13 @@ pub mod tokens {
     pub mod sizing {
         use crate::tokens::sizing::*;
 
-        pub const SIZE: f32 = control::MD;
+        pub const SIZE: f32 = control::height::STANDARD;
     }
 
     pub mod radii {
         use crate::tokens::radii;
 
-        pub const BORDER: f32 = radii::SM;
+        pub const BORDER: f32 = radii::STANDARD;
     }
 }
 

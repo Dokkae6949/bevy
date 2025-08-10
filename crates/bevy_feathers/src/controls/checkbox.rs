@@ -54,7 +54,7 @@ pub mod tokens {
     pub mod sizing {
         use crate::tokens::sizing::*;
 
-        pub const SIZE: f32 = control::MD;
+        pub const SIZE: f32 = control::size::STANDARD;
     }
 
     pub mod spacing {
@@ -66,8 +66,8 @@ pub mod tokens {
     pub mod radii {
         use crate::tokens::radii;
 
-        pub const BORDER_INNER: f32 = radii::XS;
-        pub const BORDER_OUTER: f32 = radii::SM;
+        pub const BORDER_INNER: f32 = radii::SHARP;
+        pub const BORDER_OUTER: f32 = radii::STANDARD;
     }
 
     pub mod typography {
@@ -147,6 +147,7 @@ pub fn checkbox<C: SpawnableList<ChildOf> + Send + Sync + 'static, B: Bundle>(
                 ThemeBorderColor(tokens::color::BORDER),
                 children![(
                     // Cheesy checkmark: rotated node with L-shaped border.
+                    // TODO: Center checkmark regardless of checkbox size.
                     Node {
                         position_type: PositionType::Absolute,
                         left: Val::Px(4.0),
