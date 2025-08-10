@@ -25,46 +25,6 @@ pub fn create_dark_theme() -> ThemeProps {
             (surface::FOCUSED.into(), palette::GRAY_3.lighter(0.1)),
             (surface::ACTIVE.into(), palette::GRAY_3.lighter(0.15)),
             (surface::INVERSE.into(), palette::LIGHT_GRAY_1),
-            // SURFACE.ACCENT
-            (accent::CONTRAST.into(), palette::ACCENT.darker(0.2)),
-            (accent::DISABLED.into(), palette::ACCENT.with_alpha(0.5)),
-            (accent::MUTED.into(), palette::ACCENT.with_alpha(0.6)),
-            (accent::BASE.into(), palette::ACCENT),
-            (accent::ELEVATED.into(), palette::ACCENT.lighter(0.05)),
-            (accent::FOCUSED.into(), palette::ACCENT.lighter(0.1)),
-            (accent::ACTIVE.into(), palette::ACCENT.lighter(0.15)),
-            // SURFACE.ERROR
-            (error::CONTRAST.into(), palette::ERROR.darker(0.2)),
-            (error::DISABLED.into(), palette::ERROR.with_alpha(0.5)),
-            (error::MUTED.into(), palette::ERROR.with_alpha(0.6)),
-            (error::BASE.into(), palette::ERROR),
-            (error::ELEVATED.into(), palette::ERROR.lighter(0.05)),
-            (error::FOCUSED.into(), palette::ERROR.lighter(0.1)),
-            (error::ACTIVE.into(), palette::ERROR.lighter(0.15)),
-            // SURFACE.WARNING
-            (warning::CONTRAST.into(), palette::WARNING.darker(0.2)),
-            (warning::DISABLED.into(), palette::WARNING.with_alpha(0.5)),
-            (warning::MUTED.into(), palette::WARNING.with_alpha(0.6)),
-            (warning::BASE.into(), palette::WARNING),
-            (warning::ELEVATED.into(), palette::WARNING.lighter(0.05)),
-            (warning::FOCUSED.into(), palette::WARNING.lighter(0.1)),
-            (warning::ACTIVE.into(), palette::WARNING.lighter(0.15)),
-            // SURFACE.SUCCESS
-            (success::CONTRAST.into(), palette::SUCCESS.darker(0.2)),
-            (success::DISABLED.into(), palette::SUCCESS.with_alpha(0.5)),
-            (success::MUTED.into(), palette::SUCCESS.with_alpha(0.6)),
-            (success::BASE.into(), palette::SUCCESS),
-            (success::ELEVATED.into(), palette::SUCCESS.lighter(0.05)),
-            (success::FOCUSED.into(), palette::SUCCESS.lighter(0.1)),
-            (success::ACTIVE.into(), palette::SUCCESS.lighter(0.15)),
-            // SURFACE.INFO
-            (info::CONTRAST.into(), palette::INFO.darker(0.2)),
-            (info::DISABLED.into(), palette::INFO.with_alpha(0.5)),
-            (info::MUTED.into(), palette::INFO.with_alpha(0.6)),
-            (info::BASE.into(), palette::INFO),
-            (info::ELEVATED.into(), palette::INFO.lighter(0.05)),
-            (info::FOCUSED.into(), palette::INFO.lighter(0.1)),
-            (info::ACTIVE.into(), palette::INFO.lighter(0.15)),
             // ------------------------------------
             // BORDER
             (border::CONTRAST.into(), palette::WARM_GRAY_1.darker(0.12)),
@@ -77,46 +37,6 @@ pub fn create_dark_theme() -> ThemeProps {
             (border::ELEVATED.into(), palette::WARM_GRAY_1.lighter(0.05)),
             (border::FOCUSED.into(), palette::WARM_GRAY_1.lighter(0.1)),
             (border::ACTIVE.into(), palette::WARM_GRAY_1.lighter(0.15)),
-            // BORDER.ACCENT
-            (accent::CONTRAST.into(), palette::ACCENT.darker(0.2)),
-            (accent::DISABLED.into(), palette::ACCENT.with_alpha(0.5)),
-            (accent::MUTED.into(), palette::ACCENT.with_alpha(0.6)),
-            (accent::BASE.into(), palette::ACCENT),
-            (accent::ELEVATED.into(), palette::ACCENT.lighter(0.05)),
-            (accent::FOCUSED.into(), palette::ACCENT.lighter(0.1)),
-            (accent::ACTIVE.into(), palette::ACCENT.lighter(0.15)),
-            // BORDER.ERROR
-            (error::CONTRAST.into(), palette::ERROR.darker(0.2)),
-            (error::DISABLED.into(), palette::ERROR.with_alpha(0.5)),
-            (error::MUTED.into(), palette::ERROR.with_alpha(0.6)),
-            (error::BASE.into(), palette::ERROR),
-            (error::ELEVATED.into(), palette::ERROR.lighter(0.05)),
-            (error::FOCUSED.into(), palette::ERROR.lighter(0.1)),
-            (error::ACTIVE.into(), palette::ERROR.lighter(0.15)),
-            // BORDER.WARNING
-            (warning::CONTRAST.into(), palette::WARNING.darker(0.2)),
-            (warning::DISABLED.into(), palette::WARNING.with_alpha(0.5)),
-            (warning::MUTED.into(), palette::WARNING.with_alpha(0.6)),
-            (warning::BASE.into(), palette::WARNING),
-            (warning::ELEVATED.into(), palette::WARNING.lighter(0.05)),
-            (warning::FOCUSED.into(), palette::WARNING.lighter(0.1)),
-            (warning::ACTIVE.into(), palette::WARNING.lighter(0.15)),
-            // BORDER.SUCCESS
-            (success::CONTRAST.into(), palette::SUCCESS.darker(0.2)),
-            (success::DISABLED.into(), palette::SUCCESS.with_alpha(0.5)),
-            (success::MUTED.into(), palette::SUCCESS.with_alpha(0.6)),
-            (success::BASE.into(), palette::SUCCESS),
-            (success::ELEVATED.into(), palette::SUCCESS.lighter(0.05)),
-            (success::FOCUSED.into(), palette::SUCCESS.lighter(0.1)),
-            (success::ACTIVE.into(), palette::SUCCESS.lighter(0.15)),
-            // BORDER.INFO
-            (info::CONTRAST.into(), palette::INFO.darker(0.2)),
-            (info::DISABLED.into(), palette::INFO.with_alpha(0.5)),
-            (info::MUTED.into(), palette::INFO.with_alpha(0.6)),
-            (info::BASE.into(), palette::INFO),
-            (info::ELEVATED.into(), palette::INFO.lighter(0.05)),
-            (info::FOCUSED.into(), palette::INFO.lighter(0.1)),
-            (info::ACTIVE.into(), palette::INFO.lighter(0.15)),
             // ------------------------------------
             // FOREGROUND
             (foreground::CONTRAST.into(), palette::WHITE),
@@ -126,10 +46,12 @@ pub fn create_dark_theme() -> ThemeProps {
             (foreground::ELEVATED.into(), palette::WHITE),
             (foreground::FOCUSED.into(), palette::WHITE),
             (foreground::ACTIVE.into(), palette::WHITE),
+            // ------------------------------------
             // Axis
             (axis::X.into(), palette::X_AXIS),
             (axis::Y.into(), palette::Y_AXIS),
             (axis::Z.into(), palette::Z_AXIS),
+            // ------------------------------------
             // ACCENT
             (accent::CONTRAST.into(), palette::ACCENT.lighter(0.4)),
             (accent::DISABLED.into(), palette::ACCENT.with_alpha(0.5)),
@@ -138,6 +60,7 @@ pub fn create_dark_theme() -> ThemeProps {
             (accent::ELEVATED.into(), palette::ACCENT.lighter(0.05)),
             (accent::FOCUSED.into(), palette::ACCENT.lighter(0.1)),
             (accent::ACTIVE.into(), palette::ACCENT.lighter(0.15)),
+            // ------------------------------------
             // ERROR
             (error::CONTRAST.into(), palette::ERROR.darker(0.2)),
             (error::DISABLED.into(), palette::ERROR.with_alpha(0.5)),
@@ -146,6 +69,7 @@ pub fn create_dark_theme() -> ThemeProps {
             (error::ELEVATED.into(), palette::ERROR.lighter(0.05)),
             (error::FOCUSED.into(), palette::ERROR.lighter(0.1)),
             (error::ACTIVE.into(), palette::ERROR.lighter(0.15)),
+            // ------------------------------------
             // WARNING
             (warning::CONTRAST.into(), palette::WARNING.darker(0.2)),
             (warning::DISABLED.into(), palette::WARNING.with_alpha(0.5)),
@@ -154,6 +78,7 @@ pub fn create_dark_theme() -> ThemeProps {
             (warning::ELEVATED.into(), palette::WARNING.lighter(0.05)),
             (warning::FOCUSED.into(), palette::WARNING.lighter(0.1)),
             (warning::ACTIVE.into(), palette::WARNING.lighter(0.15)),
+            // ------------------------------------
             // SUCCESS
             (success::CONTRAST.into(), palette::SUCCESS.darker(0.2)),
             (success::DISABLED.into(), palette::SUCCESS.with_alpha(0.5)),
@@ -162,6 +87,7 @@ pub fn create_dark_theme() -> ThemeProps {
             (success::ELEVATED.into(), palette::SUCCESS.lighter(0.05)),
             (success::FOCUSED.into(), palette::SUCCESS.lighter(0.1)),
             (success::ACTIVE.into(), palette::SUCCESS.lighter(0.15)),
+            // ------------------------------------
             // INFO
             (info::CONTRAST.into(), palette::INFO.darker(0.2)),
             (info::DISABLED.into(), palette::INFO.with_alpha(0.5)),
