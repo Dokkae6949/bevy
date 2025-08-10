@@ -304,7 +304,7 @@ fn demo_root(commands: &mut Commands) -> impl Bundle {
                         ..default()
                     },
                     CoreRadioGroup {
-                        on_change: Callback::System(radio_exclusion),
+                        on_change: Callback::Ignore
                     },
                     children![
                         radio(

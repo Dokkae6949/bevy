@@ -18,7 +18,6 @@ use bevy_reflect::{prelude::ReflectDefault, Reflect};
 use bevy_ui::{AlignItems, InteractionDisabled, JustifyContent, Node, Pressed, UiRect, Val};
 
 use crate::{
-    constants::{fonts, size},
     cursor::EntityCursor,
     font_styles::InheritableFont,
     handle_or_path::HandleOrPath,
@@ -35,16 +34,41 @@ pub mod tokens {
         pub const BACKGROUND_HOVERED: &str = surface::FOCUSED;
         pub const BACKGROUND_PRESSED: &str = surface::ACTIVE;
 
-        pub const BACKGROUND_PRIMARY: &str = surface::accent::BASE;
-        pub const BACKGROUND_PRIMARY_DISABLED: &str = surface::accent::DISABLED;
-        pub const BACKGROUND_PRIMARY_HOVERED: &str = surface::accent::FOCUSED;
-        pub const BACKGROUND_PRIMARY_PRESSED: &str = surface::accent::ACTIVE;
+        pub const BACKGROUND_PRIMARY: &str = accent::BASE;
+        pub const BACKGROUND_PRIMARY_DISABLED: &str = accent::DISABLED;
+        pub const BACKGROUND_PRIMARY_HOVERED: &str = accent::FOCUSED;
+        pub const BACKGROUND_PRIMARY_PRESSED: &str = accent::ACTIVE;
 
         pub const TEXT: &str = foreground::BASE;
         pub const TEXT_DISABLED: &str = foreground::DISABLED;
 
         pub const TEXT_PRIMARY: &str = foreground::BASE;
         pub const TEXT_PRIMARY_DISABLED: &str = foreground::DISABLED;
+    }
+
+    pub mod sizing {
+        use crate::tokens::sizing::*;
+
+        pub const HEIGHT: f32 = control::MD;
+    }
+
+    pub mod spacing {
+        use crate::tokens::spacing;
+
+        pub const PADDING: f32 = spacing::SM;
+    }
+
+    pub mod radii {
+        use crate::tokens::radii;
+
+        pub const BORDER: f32 = radii::SM;
+    }
+
+    pub mod typography {
+        use crate::tokens::typography::*;
+
+        pub const SIZE: f32 = size::body::MD;
+        pub const FAMILY: &str = family::REGULAR;
     }
 }
 
@@ -85,10 +109,10 @@ pub fn button<C: SpawnableList<ChildOf> + Send + Sync + 'static, B: Bundle>(
 ) -> impl Bundle {
     (
         Node {
-            height: size::ROW_HEIGHT,
+            height: Val::Px(tokens::sizing::HEIGHT),
             justify_content: JustifyContent::Center,
             align_items: AlignItems::Center,
-            padding: UiRect::axes(Val::Px(8.0), Val::Px(0.)),
+            padding: UiRect::axes(Val::Px(tokens::spacing::PADDING), Val::Px(0.)),
             flex_grow: 1.0,
             ..Default::default()
         },
@@ -99,12 +123,12 @@ pub fn button<C: SpawnableList<ChildOf> + Send + Sync + 'static, B: Bundle>(
         Hovered::default(),
         EntityCursor::System(bevy_window::SystemCursorIcon::Pointer),
         TabIndex(0),
-        props.corners.to_border_radius(4.0),
+        props.corners.to_border_radius(tokens::radii::BORDER),
         ThemeBackgroundColor(tokens::color::BACKGROUND),
         ThemeFontColor(tokens::color::TEXT),
         InheritableFont {
-            font: HandleOrPath::Path(fonts::REGULAR.to_owned()),
-            font_size: 14.0,
+            font: HandleOrPath::Path(tokens::typography::FAMILY.to_owned()),
+            font_size: tokens::typography::SIZE,
         },
         overrides,
         Children::spawn(children),

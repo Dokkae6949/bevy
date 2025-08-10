@@ -22,7 +22,6 @@ use bevy_reflect::{prelude::ReflectDefault, Reflect};
 use bevy_ui::{BorderRadius, Checked, InteractionDisabled, Node, PositionType, UiRect, Val};
 
 use crate::{
-    constants::size,
     cursor::EntityCursor,
     theme::{ThemeBackgroundColor, ThemeBorderColor},
 };
@@ -32,7 +31,7 @@ pub mod tokens {
         use crate::tokens::color::*;
 
         pub const BACKGROUND: &str = surface::BASE;
-        pub const BACKGROUND_CHECKED: &str = surface::accent::BASE;
+        pub const BACKGROUND_CHECKED: &str = accent::BASE;
 
         pub const BACKGROUND_DISABLED: &str = surface::CONTRAST;
         pub const BACKGROUND_CHECKED_DISABLED: &str = surface::DISABLED;
@@ -43,6 +42,21 @@ pub mod tokens {
 
         pub const SLIDE: &str = surface::INVERSE;
         pub const SLIDE_DISABLED: &str = surface::ELEVATED;
+    }
+
+    pub mod sizing {
+        use crate::tokens::sizing::*;
+
+        pub const WIDTH: f32 = control::XL;
+        pub const HEIGHT: f32 = control::MD;
+        pub const BORDER: f32 = border::MD;
+    }
+
+    pub mod radii {
+        use crate::tokens::radii;
+
+        pub const BORDER: f32 = radii::SM;
+        pub const BORDER_SLIDE: f32 = BORDER - super::sizing::BORDER * 0.5;
     }
 }
 
@@ -71,16 +85,16 @@ struct ToggleSwitchSlide;
 pub fn toggle_switch<B: Bundle>(props: ToggleSwitchProps, overrides: B) -> impl Bundle {
     (
         Node {
-            width: size::TOGGLE_WIDTH,
-            height: size::TOGGLE_HEIGHT,
-            border: UiRect::all(Val::Px(2.0)),
+            width: Val::Px(tokens::sizing::WIDTH),
+            height: Val::Px(tokens::sizing::HEIGHT),
+            border: UiRect::all(Val::Px(tokens::sizing::BORDER)),
             ..Default::default()
         },
         CoreCheckbox {
             on_change: props.on_change,
         },
         ToggleSwitchOutline,
-        BorderRadius::all(Val::Px(5.0)),
+        BorderRadius::all(Val::Px(tokens::radii::BORDER)),
         ThemeBackgroundColor(tokens::color::BACKGROUND),
         ThemeBorderColor(tokens::color::BORDER),
         AccessibilityNode(accesskit::Node::new(Role::Switch)),
@@ -97,7 +111,7 @@ pub fn toggle_switch<B: Bundle>(props: ToggleSwitchProps, overrides: B) -> impl 
                 width: Val::Percent(50.),
                 ..Default::default()
             },
-            BorderRadius::all(Val::Px(3.0)),
+            BorderRadius::all(Val::Px(tokens::radii::BORDER_SLIDE)),
             ToggleSwitchSlide,
             ThemeBackgroundColor(tokens::color::SLIDE),
         )],

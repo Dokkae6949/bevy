@@ -26,7 +26,6 @@ use bevy_ui::{
 };
 
 use crate::{
-    constants::{fonts, size},
     cursor::EntityCursor,
     font_styles::InheritableFont,
     handle_or_path::HandleOrPath,
@@ -40,11 +39,35 @@ pub mod tokens {
 
         pub const BACKGROUND: &str = surface::CONTRAST;
 
-        pub const BAR: &str = surface::accent::BASE;
-        pub const BAR_DISABLED: &str = surface::accent::DISABLED;
+        pub const BAR: &str = accent::BASE;
+        pub const BAR_DISABLED: &str = accent::DISABLED;
 
         pub const TEXT: &str = foreground::BASE;
-        // TODO: Disabled text.
+    }
+
+    pub mod sizing {
+        use crate::tokens::sizing::*;
+
+        pub const HEIGHT: f32 = control::MD;
+    }
+
+    pub mod spacing {
+        use crate::tokens::spacing;
+
+        pub const PADDING: f32 = spacing::SM;
+    }
+
+    pub mod radii {
+        use crate::tokens::radii;
+
+        pub const BORDER: f32 = radii::SM;
+    }
+
+    pub mod typography {
+        use crate::tokens::typography::*;
+
+        pub const SIZE: f32 = size::body::MD;
+        pub const FAMILY: &str = family::MONO;
     }
 }
 
@@ -91,10 +114,10 @@ struct SliderValueText;
 pub fn slider<B: Bundle>(props: SliderProps, overrides: B) -> impl Bundle {
     (
         Node {
-            height: size::ROW_HEIGHT,
+            height: Val::Px(tokens::sizing::HEIGHT),
             justify_content: JustifyContent::Center,
             align_items: AlignItems::Center,
-            padding: UiRect::axes(Val::Px(8.0), Val::Px(0.)),
+            padding: UiRect::axes(Val::Px(tokens::spacing::PADDING), Val::Px(0.)),
             flex_grow: 1.0,
             ..Default::default()
         },
@@ -107,7 +130,7 @@ pub fn slider<B: Bundle>(props: SliderProps, overrides: B) -> impl Bundle {
         SliderRange::new(props.min, props.max),
         EntityCursor::System(bevy_window::SystemCursorIcon::EwResize),
         TabIndex(0),
-        RoundedCorners::All.to_border_radius(6.0),
+        RoundedCorners::All.to_border_radius(tokens::radii::BORDER),
         // Use a gradient to draw the moving bar
         BackgroundGradient(vec![Gradient::Linear(LinearGradient {
             angle: PI * 0.5,
@@ -131,8 +154,8 @@ pub fn slider<B: Bundle>(props: SliderProps, overrides: B) -> impl Bundle {
             },
             ThemeFontColor(tokens::color::TEXT),
             InheritableFont {
-                font: HandleOrPath::Path(fonts::MONO.to_owned()),
-                font_size: 12.0,
+                font: HandleOrPath::Path(tokens::typography::FAMILY.to_owned()),
+                font_size: tokens::typography::SIZE,
             },
             children![(Text::new("10.0"), ThemedText, SliderValueText,)],
         )],

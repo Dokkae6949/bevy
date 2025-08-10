@@ -1,13 +1,21 @@
-pub const XS: &str = "feathers.sizing.xs";
-pub const SM: &str = "feathers.sizing.sm";
-pub const MD: &str = "feathers.sizing.md";
-pub const LG: &str = "feathers.sizing.lg";
-pub const XL: &str = "feathers.sizing.xl";
-pub const FULL: &str = "feathers.sizing.full";
+#![allow(missing_docs)]
+
+pub mod control {
+    pub const XS: f32 = 12.;
+    pub const SM: f32 = 16.;
+    pub const MD: f32 = 18.;
+    pub const LG: f32 = 24.;
+    pub const XL: f32 = 32.;
+}
 
 pub mod border {
-    pub const THIN: &str = "feathers.sizing.border.thin";
-    pub const REGULAR: &str = "feathers.sizing.border.regular";
-    pub const THICK: &str = "feathers.sizing.border.thick";
-    pub const EXTRA: &str = "feathers.sizing.border.extra";
+    pub const SM: f32 = 1.;
+    pub const MD: f32 = 2.;
+    pub const LG: f32 = 4.;
+}
+
+pub mod icon {
+    pub const SM: f32 = 16.;
+    pub const MD: f32 = 20.;
+    pub const LG: f32 = 24.;
 }

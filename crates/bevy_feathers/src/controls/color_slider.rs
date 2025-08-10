@@ -32,12 +32,36 @@ use crate::{
     cursor::EntityCursor,
     palette,
     rounded_corners::RoundedCorners,
+    theme::ThemeBackgroundColor,
 };
 
-const SLIDER_HEIGHT: f32 = 16.0;
-const TRACK_PADDING: f32 = 3.0;
-const TRACK_RADIUS: f32 = SLIDER_HEIGHT * 0.5 - TRACK_PADDING;
-const THUMB_SIZE: f32 = SLIDER_HEIGHT - 2.0;
+pub mod tokens {
+    pub mod color {
+        use crate::tokens::color::*;
+
+        pub const LEFT_ENDCAP: &str = axis::X;
+        pub const RIGHT_ENDCAP: &str = axis::Z;
+    }
+
+    pub mod sizing {
+        use crate::tokens::sizing::*;
+
+        pub const HEIGHT: f32 = control::SM;
+        pub const THUMB: f32 = HEIGHT - 2.0;
+        pub const BORDER: f32 = border::SM;
+    }
+
+    pub mod spacing {
+        // use crate::tokens::spacing;
+
+        // TODO: Figure out why it bugs out without 3. padding.
+        pub const PADDING: f32 = 3.; //spacing::SM;
+    }
+
+    pub mod radii {
+        pub const TRACK: f32 = super::sizing::HEIGHT * 0.5 - super::spacing::PADDING;
+    }
+}
 
 /// Indicates which color channel we want to edit.
 #[derive(Component, Default, Clone)]
@@ -189,7 +213,7 @@ pub fn color_slider<B: Bundle>(props: ColorSliderProps, overrides: B) -> impl Bu
         Node {
             display: Display::Flex,
             flex_direction: FlexDirection::Row,
-            height: Val::Px(SLIDER_HEIGHT),
+            height: Val::Px(tokens::sizing::HEIGHT),
             align_items: AlignItems::Stretch,
             flex_grow: 1.0,
             ..Default::default()
@@ -213,11 +237,11 @@ pub fn color_slider<B: Bundle>(props: ColorSliderProps, overrides: B) -> impl Bu
                     position_type: PositionType::Absolute,
                     left: Val::Px(0.),
                     right: Val::Px(0.),
-                    top: Val::Px(TRACK_PADDING),
-                    bottom: Val::Px(TRACK_PADDING),
+                    top: Val::Px(tokens::spacing::PADDING),
+                    bottom: Val::Px(tokens::spacing::PADDING),
                     ..Default::default()
                 },
-                RoundedCorners::All.to_border_radius(TRACK_RADIUS),
+                RoundedCorners::All.to_border_radius(tokens::radii::TRACK),
                 ColorSliderTrack,
                 AlphaPattern,
                 MaterialNode::<AlphaPatternMaterial>(Handle::default()),
@@ -225,11 +249,11 @@ pub fn color_slider<B: Bundle>(props: ColorSliderProps, overrides: B) -> impl Bu
                     // Left endcap
                     (
                         Node {
-                            width: Val::Px(THUMB_SIZE * 0.5),
+                            width: Val::Px(tokens::sizing::THUMB * 0.5),
                             ..Default::default()
                         },
-                        RoundedCorners::Left.to_border_radius(TRACK_RADIUS),
-                        BackgroundColor(palette::X_AXIS),
+                        RoundedCorners::Left.to_border_radius(tokens::radii::TRACK),
+                        ThemeBackgroundColor(tokens::color::LEFT_ENDCAP),
                     ),
                     // Track with gradient
                     (
@@ -252,8 +276,8 @@ pub fn color_slider<B: Bundle>(props: ColorSliderProps, overrides: B) -> impl Bu
                                 position_type: PositionType::Absolute,
                                 left: Val::Percent(0.),
                                 top: Val::Percent(50.),
-                                width: Val::Px(THUMB_SIZE),
-                                height: Val::Px(THUMB_SIZE),
+                                width: Val::Px(tokens::sizing::THUMB),
+                                height: Val::Px(tokens::sizing::THUMB),
                                 border: UiRect::all(Val::Px(2.0)),
                                 ..Default::default()
                             },
@@ -262,7 +286,7 @@ pub fn color_slider<B: Bundle>(props: ColorSliderProps, overrides: B) -> impl Bu
                             BorderRadius::MAX,
                             BorderColor::all(palette::WHITE),
                             Outline {
-                                width: Val::Px(1.),
+                                width: Val::Px(tokens::sizing::BORDER),
                                 offset: Val::Px(0.),
                                 color: palette::BLACK
                             },
@@ -275,11 +299,11 @@ pub fn color_slider<B: Bundle>(props: ColorSliderProps, overrides: B) -> impl Bu
                     // Right endcap
                     (
                         Node {
-                            width: Val::Px(THUMB_SIZE * 0.5),
+                            width: Val::Px(tokens::sizing::THUMB * 0.5),
                             ..Default::default()
                         },
-                        RoundedCorners::Right.to_border_radius(TRACK_RADIUS),
-                        BackgroundColor(palette::Z_AXIS),
+                        RoundedCorners::Right.to_border_radius(tokens::radii::TRACK),
+                        ThemeBackgroundColor(tokens::color::RIGHT_ENDCAP),
                     ),
                 ]
             ),

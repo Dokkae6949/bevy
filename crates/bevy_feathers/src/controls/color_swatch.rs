@@ -9,9 +9,22 @@ use bevy_ui_render::ui_material::MaterialNode;
 
 use crate::{
     alpha_pattern::{AlphaPattern, AlphaPatternMaterial},
-    constants::size,
     palette,
 };
+
+pub mod tokens {
+    pub mod sizing {
+        use crate::tokens::sizing::*;
+
+        pub const SIZE: f32 = control::MD;
+    }
+
+    pub mod radii {
+        use crate::tokens::radii;
+
+        pub const BORDER: f32 = radii::SM;
+    }
+}
 
 /// Marker identifying a color swatch.
 #[derive(Component, Default, Clone, Reflect)]
@@ -32,14 +45,14 @@ pub struct ColorSwatchFg;
 pub fn color_swatch<B: Bundle>(overrides: B) -> impl Bundle {
     (
         Node {
-            height: size::ROW_HEIGHT,
-            min_width: size::ROW_HEIGHT,
+            height: Val::Px(tokens::sizing::SIZE),
+            min_width: Val::Px(tokens::sizing::SIZE),
             ..Default::default()
         },
         ColorSwatch,
         AlphaPattern,
         MaterialNode::<AlphaPatternMaterial>(Handle::default()),
-        BorderRadius::all(Val::Px(5.0)),
+        BorderRadius::all(Val::Px(tokens::radii::BORDER)),
         overrides,
         children![(
             Node {
@@ -52,7 +65,7 @@ pub fn color_swatch<B: Bundle>(overrides: B) -> impl Bundle {
             },
             ColorSwatchFg,
             BackgroundColor(palette::ACCENT.with_alpha(0.5)),
-            BorderRadius::all(Val::Px(5.0))
+            BorderRadius::all(Val::Px(tokens::radii::BORDER))
         ),],
     )
 }

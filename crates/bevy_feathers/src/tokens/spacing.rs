@@ -1,8 +1,9 @@
 //! Used for spacing, padding and margins.
 
-pub const XS: u8 = 2;
-pub const SM: u8 = 4;
-pub const MD: u8 = 8;
-pub const LG: u8 = 12;
-pub const XL: u8 = 24;
-pub const XXL: u8 = 32;
+pub const XXS: f32 = 2.;
+pub const XS: f32 = 4.;
+pub const SM: f32 = 8.;
+pub const MD: f32 = 12.;
+pub const LG: f32 = 18.;
+pub const XL: f32 = 24.;
+pub const XXL: f32 = 32.;

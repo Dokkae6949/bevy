@@ -5,9 +5,7 @@
 //! value to a specific visual aspect of a widget, such as background or border.
 
 pub mod color;
-pub mod opacity;
 pub mod radii;
-pub mod shadow;
 pub mod sizing;
 pub mod spacing;
 pub mod typography;

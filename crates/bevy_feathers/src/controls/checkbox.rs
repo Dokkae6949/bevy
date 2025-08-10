@@ -24,7 +24,6 @@ use bevy_ui::{
 };
 
 use crate::{
-    constants::{fonts, size},
     cursor::EntityCursor,
     font_styles::InheritableFont,
     handle_or_path::HandleOrPath,
@@ -38,7 +37,7 @@ pub mod tokens {
         pub const BACKGROUND: &str = surface::BASE;
         pub const BACKGROUND_DISABLED: &str = surface::DISABLED;
 
-        pub const BACKGROUND_CHECKED: &str = surface::accent::BASE;
+        pub const BACKGROUND_CHECKED: &str = accent::BASE;
         pub const BACKGROUND_CHECKED_DISABLED: &str = surface::DISABLED;
 
         pub const BORDER: &str = border::BASE;
@@ -50,6 +49,32 @@ pub mod tokens {
 
         pub const TEXT: &str = foreground::BASE;
         pub const TEXT_DISABLED: &str = foreground::DISABLED;
+    }
+
+    pub mod sizing {
+        use crate::tokens::sizing::*;
+
+        pub const SIZE: f32 = control::MD;
+    }
+
+    pub mod spacing {
+        use crate::tokens::spacing;
+
+        pub const SPACING: f32 = spacing::XS;
+    }
+
+    pub mod radii {
+        use crate::tokens::radii;
+
+        pub const BORDER_INNER: f32 = radii::XS;
+        pub const BORDER_OUTER: f32 = radii::SM;
+    }
+
+    pub mod typography {
+        use crate::tokens::typography::*;
+
+        pub const SIZE: f32 = size::body::MD;
+        pub const FAMILY: &str = family::REGULAR;
     }
 }
 
@@ -92,7 +117,7 @@ pub fn checkbox<C: SpawnableList<ChildOf> + Send + Sync + 'static, B: Bundle>(
             flex_direction: FlexDirection::Row,
             justify_content: JustifyContent::Start,
             align_items: AlignItems::Center,
-            column_gap: Val::Px(4.0),
+            column_gap: Val::Px(tokens::spacing::SPACING),
             ..Default::default()
         },
         CoreCheckbox {
@@ -104,20 +129,20 @@ pub fn checkbox<C: SpawnableList<ChildOf> + Send + Sync + 'static, B: Bundle>(
         TabIndex(0),
         ThemeFontColor(tokens::color::TEXT),
         InheritableFont {
-            font: HandleOrPath::Path(fonts::REGULAR.to_owned()),
-            font_size: 14.0,
+            font: HandleOrPath::Path(tokens::typography::FAMILY.to_owned()),
+            font_size: tokens::typography::SIZE,
         },
         overrides,
         Children::spawn((
             Spawn((
                 Node {
-                    width: size::CHECKBOX_SIZE,
-                    height: size::CHECKBOX_SIZE,
-                    border: UiRect::all(Val::Px(2.0)),
+                    width: Val::Px(tokens::sizing::SIZE),
+                    height: Val::Px(tokens::sizing::SIZE),
+                    border: UiRect::all(Val::Px(tokens::radii::BORDER_INNER)),
                     ..Default::default()
                 },
                 CheckboxOutline,
-                BorderRadius::all(Val::Px(4.0)),
+                BorderRadius::all(Val::Px(tokens::radii::BORDER_OUTER)),
                 ThemeBackgroundColor(tokens::color::BACKGROUND),
                 ThemeBorderColor(tokens::color::BORDER),
                 children![(

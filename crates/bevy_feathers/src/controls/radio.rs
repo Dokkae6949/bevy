@@ -23,7 +23,6 @@ use bevy_ui::{
 };
 
 use crate::{
-    constants::{fonts, size},
     cursor::EntityCursor,
     font_styles::InheritableFont,
     handle_or_path::HandleOrPath,
@@ -38,12 +37,38 @@ pub mod tokens {
         pub const TEXT: &str = foreground::BASE;
         pub const TEXT_DISABLED: &str = foreground::DISABLED;
 
-        pub const MARK: &str = surface::accent::BASE;
-        pub const MARK_DISABLED: &str = surface::accent::DISABLED;
+        pub const MARK: &str = accent::BASE;
+        pub const MARK_DISABLED: &str = accent::DISABLED;
 
         pub const BORDER: &str = border::BASE;
         pub const BORDER_DISABLED: &str = border::DISABLED;
         pub const BORDER_HOVERED: &str = border::FOCUSED;
+    }
+
+    pub mod sizing {
+        use crate::tokens::sizing::*;
+
+        pub const SIZE: f32 = control::MD;
+        pub const BORDER: f32 = border::MD;
+    }
+
+    pub mod spacing {
+        use crate::tokens::spacing;
+
+        pub const SPACING: f32 = spacing::XS;
+    }
+
+    pub mod radii {
+        use crate::tokens::radii;
+
+        pub const BORDER: f32 = radii::FULL;
+    }
+
+    pub mod typography {
+        use crate::tokens::typography::*;
+
+        pub const SIZE: f32 = size::body::MD;
+        pub const FAMILY: &str = family::REGULAR;
     }
 }
 
@@ -73,7 +98,7 @@ pub fn radio<C: SpawnableList<ChildOf> + Send + Sync + 'static, B: Bundle>(
             flex_direction: FlexDirection::Row,
             justify_content: JustifyContent::Start,
             align_items: AlignItems::Center,
-            column_gap: Val::Px(4.0),
+            column_gap: Val::Px(tokens::spacing::SPACING),
             ..Default::default()
         },
         CoreRadio,
@@ -82,8 +107,8 @@ pub fn radio<C: SpawnableList<ChildOf> + Send + Sync + 'static, B: Bundle>(
         TabIndex(0),
         ThemeFontColor(tokens::color::TEXT),
         InheritableFont {
-            font: HandleOrPath::Path(fonts::REGULAR.to_owned()),
-            font_size: 14.0,
+            font: HandleOrPath::Path(tokens::typography::FAMILY.to_owned()),
+            font_size: tokens::typography::SIZE,
         },
         overrides,
         Children::spawn((
@@ -92,9 +117,9 @@ pub fn radio<C: SpawnableList<ChildOf> + Send + Sync + 'static, B: Bundle>(
                     display: Display::Flex,
                     align_items: AlignItems::Center,
                     justify_content: JustifyContent::Center,
-                    width: size::RADIO_SIZE,
-                    height: size::RADIO_SIZE,
-                    border: UiRect::all(Val::Px(2.0)),
+                    width: Val::Px(tokens::sizing::SIZE),
+                    height: Val::Px(tokens::sizing::SIZE),
+                    border: UiRect::all(Val::Px(tokens::sizing::BORDER)),
                     ..Default::default()
                 },
                 RadioOutline,
@@ -107,7 +132,7 @@ pub fn radio<C: SpawnableList<ChildOf> + Send + Sync + 'static, B: Bundle>(
                         height: Val::Px(8.),
                         ..Default::default()
                     },
-                    BorderRadius::MAX,
+                    BorderRadius::all(Val::Px(tokens::radii::BORDER)),
                     RadioMark,
                     ThemeBackgroundColor(tokens::color::MARK),
                 )],
